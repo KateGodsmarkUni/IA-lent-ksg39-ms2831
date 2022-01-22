@@ -13,7 +13,7 @@ def test_stations_by_distance():
     sorted_stations = stations_by_distance(stations, p)
     assert len(stations) == len(sorted_stations)
     for i in range(len(stations) - 1):
-       assert sorted_stations[i][2] <= sorted_stations[i + 1][2]
+       assert sorted_stations[i][1] <= sorted_stations[i + 1][1]
 
     
 def test_stations_within_radius():
