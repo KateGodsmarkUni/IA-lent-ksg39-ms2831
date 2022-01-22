@@ -1,6 +1,3 @@
-# Copyright (C) 2018 Garth N. Wells
-#
-# SPDX-License-Identifier: MIT
 """This module contains a collection of functions related to
 geographical data.
 
@@ -31,3 +28,26 @@ def stations_within_radius(stations, centre, r):
         if distance < r:
             stations_within_r.append(station.name)
     return stations_within_r
+
+def rivers_with_station(stations):
+
+    '''A function to return a set with the names of the rivers with a monitoring station from the list'''
+
+    rivers = set()
+    for station in stations:
+        rivers.add(station.river)
+    return rivers 
+
+def stations_by_river(stations):
+
+    '''A function to return a dict with the names of the rivers and its monitoring stations'''
+
+    rivers_and_stations = {}
+    rivers = rivers_with_station(stations)
+    for river in rivers:
+        rivers_stations = []
+        for station in stations:
+            if river == station.river:
+                rivers_stations.append(station)
+        rivers_and_stations[river] =  rivers_stations
+    return rivers_and_stations
