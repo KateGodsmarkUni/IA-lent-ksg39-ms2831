@@ -53,4 +53,19 @@ def test_stations_by_river():
     assert total == len(stations)
 
 
-#def test_rivers_by_station_number():
+def test_rivers_by_station_number():
+
+    #Build list of stations
+    stations = build_station_list()
+    N = 9
+
+    rivers_station_number = rivers_by_station_number(stations, N)
+    i = 0
+    for river in rivers_station_number:
+        if i != 0 and river[i] < river[i-1]:
+            i += 1
+        elif i != 0 and river[i] == river[i-1]:
+            pass
+        elif i == 0:
+            i += 1
+    assert i == N
