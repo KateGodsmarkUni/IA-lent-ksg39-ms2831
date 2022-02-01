@@ -1,6 +1,5 @@
 from floodsystem.stationdata import build_station_list
 from floodsystem.geo import rivers_by_station_number, stations_by_river
-from floodsystem.utils import sorted_by_key
 
 def run():
 
