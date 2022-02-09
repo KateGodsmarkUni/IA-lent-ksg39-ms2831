@@ -14,7 +14,7 @@ def run():
 
 
     stations = (stations_within_radius(all_stations, centre, 10))
-    print(f'The stations with 10km are: {sorted_by_key(stations, 0)}')
+    print(f'The stations within 10km are: {sorted_by_key(stations, 0)}')
 
 if __name__ == "__main__":
     print("*** Task 1C: CUED Part IA Flood Warning System ***")

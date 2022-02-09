@@ -10,7 +10,7 @@ def run():
     stations = build_station_list()
 
     #example places
-    p = (52.2, 0.115)
+    p = (52.2053, 0.1218)
     #p = (51.47, -0.609)
 
     station_distances = (stations_by_distance(stations, p))
