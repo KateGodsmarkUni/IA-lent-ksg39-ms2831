@@ -1,6 +1,7 @@
 from .utils import sorted_by_key  # noqa
 
 def stations_level_over_threshold(stations, tol):
+    '''Function that returns stations which have a relative water level over the threshold'''
     high_stations = []
     for station in stations:
         try:
@@ -10,3 +11,13 @@ def stations_level_over_threshold(stations, tol):
         except:
             pass
     return sorted_by_key(high_stations, 1, reverse=True)
+
+
+def stations_highest_rel_level(stations, N):
+    ''' Function that returns a list of the N stations (objects) with the highest relative water level.'''
+    all_stations = stations_level_over_threshold(stations, 0)
+    highest_n = []
+    for i in range(N):
+        highest_n.append(all_stations[i][0])
+    return highest_n
+
