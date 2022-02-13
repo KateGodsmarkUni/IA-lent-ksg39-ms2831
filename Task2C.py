@@ -8,7 +8,7 @@ def run():
     # Update latest level data for all stations
     update_water_levels(stations)
 
-    highest_stations = stations_highest_rel_level(stations, 5)
+    highest_stations = stations_highest_rel_level(stations, 10)
     for high_station in highest_stations:
         name = high_station.name
         level = high_station.relative_water_level()
