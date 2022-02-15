@@ -14,11 +14,16 @@ def run():
 
     # Update latest level data for all stations
     update_water_levels(stations)
+        
 
     # Get data of 5 stations with highest relative water levels 
     highest_stations = stations_highest_rel_level(stations, 5)
     for highest_station in highest_stations:
         print(highest_station.name)
+        print(highest_station.typical_range[0])
+        print(highest_station.typical_range[1])
+        print(highest_station.latest_level)
+        print(highest_station.relative_water_level())
 
     # Get water level data for last d days
     d = 10
