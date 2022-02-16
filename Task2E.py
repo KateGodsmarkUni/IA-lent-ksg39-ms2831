@@ -23,8 +23,11 @@ def run():
     # Get water level data for last d days
     d = 10
     for station in highest_stations:
+        print(station.name)
         dates, levels = fetch_measure_levels(station.measure_id, dt=datetime.timedelta(days=d))
-        plot_water_levels(station, dates, levels)
+        for date, level in zip(dates, levels):
+            print(date, level)
+        #plot_water_levels(station, dates, levels)
 
 if __name__ == "__main__":
     print("*** Task 2E: CUED Part IA Flood Warning System ***")
