@@ -6,8 +6,13 @@ JSON objects fetched from the Internet and
 
 """
 
+import datetime
+
 from . import datafetcher
 from .station import MonitoringStation
+from .analysis import diff_polyfit
+from .utils import sorted_by_key
+from .datafetcher import fetch_measure_levels
 
 
 def build_station_list(use_cache=True):
@@ -87,3 +92,37 @@ def update_water_levels(stations):
         if station.measure_id in measure_id_to_value:
             if isinstance(measure_id_to_value[station.measure_id], float):
                 station.latest_level = measure_id_to_value[station.measure_id]
+
+def sort_station_risk_data(stations, d, p):
+
+    '''This function uses station data to split stations into higher risk(water level above typical '''
+    '''maximum), lower risk(water level below typical max) and invalid data stations'''
+    
+    # Set up lists 
+    higher_flood_risk = []
+    lower_flood_risk = []
+    invalid_data = []
+
+    # Calculate and sort data needed to assess flood risk level
+    for station in stations:
+        try:
+            if station.relative_water_level() > 1.0:
+                dates, levels = fetch_measure_levels(station.measure_id, dt=datetime.timedelta(days=d))
+                if bool(dates)==True:
+                    level_change = diff_polyfit(dates, levels, p)
+                else:
+                    level_change = "Invalid past data"
+                higher_flood_risk.append([station.name, station.town, level_change, station.relative_water_level()])
+            else:
+                lower_flood_risk.append([station.name, station.town, station.relative_water_level()])
+        except:
+            invalid_data.append([station.name, station.town])
+    
+    # Sort lists into decreasing order of relative water level
+    higher_risk_sorted = sorted_by_key(higher_flood_risk, 3)
+    lower_risk_sorted = sorted_by_key(lower_flood_risk, 2)
+
+    higher_risk_sorted.reverse()
+    lower_risk_sorted.reverse()
+
+    return(higher_risk_sorted, lower_risk_sorted, invalid_data)

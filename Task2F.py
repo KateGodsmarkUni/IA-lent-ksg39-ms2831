@@ -16,7 +16,7 @@ def run():
     update_water_levels(stations)
 
     # Get data of 5 stations with highest relative water levels, discarding stations with invalid data
-    d = 2
+    d = 7 # Change to 2!!
     all_stations = stations_highest_rel_level(stations, 900)
     highest_stations = []
     i = 0
@@ -33,14 +33,8 @@ def run():
     
     # Get water level data for last d days
     for station in highest_stations:
-        print(station.name)
-        if station.name != "Letcombe Bassett":
-            dates, levels = fetch_measure_levels(station.measure_id, dt=datetime.timedelta(days=d))
-            plot_water_level_with_fit(station, dates, levels, 4)
-
-#Letcombe Bassett always has no data retrieved using fetch_measure_levels
-#Find out if that is an error in program that should be corrected, or left alone
-#Or if station should be omitted altogether and the 6th station to be used
+        dates, levels = fetch_measure_levels(station.measure_id, dt=datetime.timedelta(days=d))
+        plot_water_level_with_fit(station, dates, levels, 10) # Change to 4!!
 
 if __name__ == "__main__":
     print("*** Task 2F: CUED Part IA Flood Warning System ***")

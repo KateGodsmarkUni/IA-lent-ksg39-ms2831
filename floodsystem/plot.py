@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 
 from .analysis import polyfit
 
+#ALL FUNCTIONS HERE NEED TESTS FOR THEM
 
 def plot_water_levels(station, dates, levels):
     
