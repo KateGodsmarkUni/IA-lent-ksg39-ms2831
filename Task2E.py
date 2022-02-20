@@ -1,7 +1,5 @@
 import datetime
 
-import jinja2_time
-
 from floodsystem.datafetcher import fetch_measure_levels
 from floodsystem.stationdata import build_station_list, update_water_levels
 from floodsystem.flood import stations_highest_rel_level
@@ -19,7 +17,7 @@ def run():
 
     # Get data of 5 stations with highest relative water levels, discarding stations without previous data
     d = 10
-    all_stations = stations_highest_rel_level(stations, 900)
+    all_stations = stations_highest_rel_level(stations, 50)
     highest_stations = []
     i = 0
     for station in all_stations:
@@ -36,6 +34,7 @@ def run():
     # Get water level data for last d days
     for station in highest_stations:
         dates, levels = fetch_measure_levels(station.measure_id, dt=datetime.timedelta(days=d))
+        print(dates)
         plot_water_levels(station, dates, levels)
 
 

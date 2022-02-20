@@ -21,10 +21,31 @@ def run():
     p = 10 #polyfit order
     higher_risk, lower_risk, invalid_data = sort_station_risk_data(stations, d, 10)
 
-    #Assess flood risk for every location and categorize towns based on risk level
+    # Assess flood risk for every location and categorize towns based on risk level
     low_risk, moderate_risk, high_risk, severe_risk = assess_risk_level(higher_risk, lower_risk)
 
-    #Need to put in code that will give risk data in reasonable format, rather than just listing all stations
+    # Give list of towns at severe risk of flooding
+    print("----------------------------------------------------------------------")
+    print("Towns which have been assessed to have severe risk of flooding(in descending order of severity):")
+    for location in severe_risk:
+        print(location)
+    print("----------------------------------------------------------------------")
+    
+    # Find flood risk of towns that are not in severe risk of flooding
+    request_town = input("Enter name of town to see its flood risk level:")
+
+    while request_town != "n":
+        if request_town in low_risk:
+            print("Low risk of flooding")
+        elif request_town in moderate_risk:
+            print("Moderate risk of flooding")
+        elif request_town in high_risk:
+            print("High risk of flooding")
+        elif request_town in severe_risk:
+            print("Severe risk of flooding")
+        else:
+            print("Data unavailable")
+        request_town = input("Enter name of town to see its flood risk level(if not severe), enter n to exit:")
 
 if __name__ == "__main__":
     print("*** Task 2G: CUED Part IA Flood Warning System ***")

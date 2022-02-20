@@ -67,7 +67,6 @@ def build_station_list(use_cache=True):
 
     return stations
 
-
 def update_water_levels(stations):
     """Attach level data contained in measure_data to stations"""
 
@@ -119,10 +118,7 @@ def sort_station_risk_data(stations, d, p):
             invalid_data.append([station.name, station.town])
     
     # Sort lists into decreasing order of relative water level
-    higher_risk_sorted = sorted_by_key(higher_flood_risk, 3)
-    lower_risk_sorted = sorted_by_key(lower_flood_risk, 2)
-
-    higher_risk_sorted.reverse()
-    lower_risk_sorted.reverse()
-
+    higher_risk_sorted = sorted_by_key(higher_flood_risk, 3, reverse=True)
+    lower_risk_sorted = sorted_by_key(lower_flood_risk, 2, reverse=True)
+    
     return(higher_risk_sorted, lower_risk_sorted, invalid_data)

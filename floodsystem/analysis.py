@@ -58,9 +58,11 @@ def assess_risk_level(higher_risk, lower_risk):
             high_risk.append(town)
         elif 1.6 < rel_water_level <= 2.0 and level_change > 0:
             severe_risk.append(town)
-        elif rel_water_level > 2.0:
+        elif 2.0 < rel_water_level <= 70:
             severe_risk.append(town)
         elif level_change == "Invalid past data":
+            pass
+        else:
             pass
     
     # Assess flood risk for stations with level below typical max

@@ -4,8 +4,6 @@ import matplotlib.pyplot as plt
 
 from .analysis import polyfit
 
-#ALL FUNCTIONS HERE NEED TESTS FOR THEM
-
 def plot_water_levels(station, dates, levels):
     
     '''This function plots a graph of water levels over a period of time for a certain station'''

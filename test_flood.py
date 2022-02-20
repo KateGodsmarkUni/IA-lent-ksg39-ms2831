@@ -13,7 +13,7 @@ def test_stations_level_over_threshold():
 
     stations_above = stations_level_over_threshold(stations, 0.9)
     for i in range(len(stations_above) - 1):
-        assert stations_above[i][1] > stations_above[i + 1][1]
+        assert stations_above[i][1] >= stations_above[i + 1][1]
         assert stations_above[i][1] >= 0.9
 
 
