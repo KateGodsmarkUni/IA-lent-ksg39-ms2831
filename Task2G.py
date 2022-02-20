@@ -17,9 +17,9 @@ def run():
     update_water_levels(stations)
 
     # Get data required for each station to assess flood risk, separating stations with valid and invalid data first
-    d = 7 #number of past days to get river data for to assess flood severity
-    p = 10 #polyfit order
-    higher_risk, lower_risk, invalid_data = sort_station_risk_data(stations, d, 10)
+    d = 4 #number of past days to get river data for to assess flood severity
+    p = 4 #polyfit order
+    higher_risk, lower_risk = sort_station_risk_data(stations, d, p)
 
     # Assess flood risk for every location and categorize towns based on risk level
     low_risk, moderate_risk, high_risk, severe_risk = assess_risk_level(higher_risk, lower_risk)
@@ -32,7 +32,7 @@ def run():
     print("----------------------------------------------------------------------")
     
     # Find flood risk of towns that are not in severe risk of flooding
-    request_town = input("Enter name of town to see its flood risk level:")
+    request_town = input("Enter name of town to see its flood risk level, enter n to exit:")
 
     while request_town != "n":
         if request_town in low_risk:
@@ -45,7 +45,7 @@ def run():
             print("Severe risk of flooding")
         else:
             print("Data unavailable")
-        request_town = input("Enter name of town to see its flood risk level(if not severe), enter n to exit:")
+        request_town = input("Enter name of town to see its flood risk level, enter n to exit:")
 
 if __name__ == "__main__":
     print("*** Task 2G: CUED Part IA Flood Warning System ***")

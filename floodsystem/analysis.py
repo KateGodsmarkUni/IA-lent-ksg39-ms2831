@@ -43,9 +43,9 @@ def assess_risk_level(higher_risk, lower_risk):
 
     # Assess flood risk for stations with level above typical max
     for station in higher_risk:
-        town = station[1]
-        level_change = station[2]
-        rel_water_level = station[3]
+        town = station[0]
+        level_change = station[1]
+        rel_water_level = station[2]
         if 1.0 < rel_water_level <= 1.2 and level_change < 0:
             low_risk.append(town)
         elif 1.0 < rel_water_level <= 1.2 and level_change > 0:
@@ -64,10 +64,10 @@ def assess_risk_level(higher_risk, lower_risk):
             pass
         else:
             pass
-    
+
     # Assess flood risk for stations with level below typical max
     for station in lower_risk:
-        town = station[1]
+        town = station[0]
         low_risk.append(town)
     
     return(low_risk, moderate_risk, high_risk, severe_risk)

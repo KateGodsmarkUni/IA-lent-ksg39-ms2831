@@ -100,7 +100,6 @@ def sort_station_risk_data(stations, d, p):
     # Set up lists 
     higher_flood_risk = []
     lower_flood_risk = []
-    invalid_data = []
 
     # Calculate and sort data needed to assess flood risk level
     for station in stations:
@@ -111,14 +110,14 @@ def sort_station_risk_data(stations, d, p):
                     level_change = diff_polyfit(dates, levels, p)
                 else:
                     level_change = "Invalid past data"
-                higher_flood_risk.append([station.name, station.town, level_change, station.relative_water_level()])
+                higher_flood_risk.append([station.town, level_change, station.relative_water_level()])
             else:
-                lower_flood_risk.append([station.name, station.town, station.relative_water_level()])
+                lower_flood_risk.append([station.town, station.relative_water_level()])
         except:
-            invalid_data.append([station.name, station.town])
+            pass
     
     # Sort lists into decreasing order of relative water level
-    higher_risk_sorted = sorted_by_key(higher_flood_risk, 3, reverse=True)
-    lower_risk_sorted = sorted_by_key(lower_flood_risk, 2, reverse=True)
+    higher_risk_sorted = sorted_by_key(higher_flood_risk, 2, reverse=True)
+    lower_risk_sorted = sorted_by_key(lower_flood_risk, 1, reverse=True)
     
-    return(higher_risk_sorted, lower_risk_sorted, invalid_data)
+    return(higher_risk_sorted, lower_risk_sorted)
